@@ -35,6 +35,5 @@ public class Transporter : BaseCharacter
     private void OnTriggerEnter2D(Collider2D other)
     {
         goldCart.gameObject.SetActive(true);
-        Debug.Log("aaaaa");
     }
 }
