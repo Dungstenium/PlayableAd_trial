@@ -21,18 +21,11 @@ public class MinerComponent : BaseCharacter
 
         incomeIncreaser.AddIncome(miningValue);
 
-        // incomeIncreaser.gameObject.SetActive(false);
-        // incomeIncreaser.gameObject.SetActive(true);
-
         var cam = Camera.main;
         int counter = 0;
         while(counter < miningValue / 10)
         {
-            // RectTransform tempRect = new RectTransform();
-            // tempRect.position = cam.ScreenToWorldPoint(incomeIncreaser.GetComponent<RectTransform>().position);
-
-            // goldPrefab.GetComponent<GoldSpawner>().targetTransf = tempRect;
-            var gold = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+            var gold = Instantiate(goldPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             gold.GetComponent<GoldSpawnerNonUI>().targetTransf = target;
             counter++;
         }
