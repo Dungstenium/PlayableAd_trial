@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GoldSpawner : MonoBehaviour
 {
     private Vector3 initialPosition;
-    [SerializeField] private RectTransform targetTransf;
+    [SerializeField] public RectTransform targetTransf;
     private RectTransform rectTransf;
 
     private void Awake()
@@ -18,7 +18,11 @@ public class GoldSpawner : MonoBehaviour
     void OnEnable()
     {
         rectTransf.anchoredPosition = initialPosition;
-        GetComponent<Image>().enabled = true;
+        
+        if(GetComponent<Image>() != null)
+        {
+            GetComponent<Image>().enabled = true;
+        }
          
         StopAllCoroutines();
         StartCoroutine(MoveTo());
@@ -27,6 +31,12 @@ public class GoldSpawner : MonoBehaviour
     
    private IEnumerator MoveTo()
    {
+        if(targetTransf == null) 
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);        
+        }
+
         float counter = 0;
         while(Vector3.Distance(rectTransf.anchoredPosition, targetTransf.anchoredPosition) > 0.7f)
         {
@@ -36,6 +46,9 @@ public class GoldSpawner : MonoBehaviour
             yield return null;
         }
 
-        GetComponent<Image>().enabled = false;
+        if(GetComponent<Image>() != null)
+        {
+            GetComponent<Image>().enabled = false;
+        }
    }
 }
